@@ -13,6 +13,7 @@
 ## 代码
 
 ```php
+
 class Solution {
 
     /**
@@ -20,6 +21,27 @@ class Solution {
      * @return Boolean
      */
     function isPowerOfThree($n) {
+        // 方法1，递归
+        if ($n <= 0) {
+            return false;
+        }
+        if ($n == 1) {
+            return true;
+        }
+        if (($n % 3) !== 0) {
+            return false;
+        }
+        return $this->isPowerOfThree($n/3);
+/*
+        // 方法2：循环取余
+        while ($n && $n % 3 == 0) {
+            $n = $n / 3;
+        }
+        return $n == 1;
+ */
+
+/*
+        // 方法3：乘法
         $a = 1;
         while($a <= $n){
             if ($a == $n) {
@@ -28,6 +50,9 @@ class Solution {
             $a *= 3;
         }
         return false;
+*/
+
     }
 }
+
 ```
