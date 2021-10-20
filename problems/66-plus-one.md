@@ -28,6 +28,47 @@ class Solution {
      */
     function plusOne($digits) {
         $length = sizeof($digits);
+        // 分类讨论，第一种情况，最后一位小于9，则只需要将最后一位加1，然后就可以直接返回了。
+        if ($digits[$length - 1] < 9) {
+            $digits[$length - 1] += 1;
+            return $digits;
+        }
+        /**
+        * 分类讨论，第二种情况，就是最后一位为9，加1后需要向前进1的情况，
+        * 此时依次向前，若需要进位，则判断前一位加1后是否需要进位，循环这个操作，
+        * 当遇到不需要进位，则跳出，后面也都不需要在考虑进位问题了。
+         */
+        for ($i = $length - 1; $i>=0; $i--) {
+            $temp = $digits[$i] + 1;
+            if ($temp >= 10) {
+                $digits[$i] = $temp - 10;
+            } else {
+                $digits[$i] = $temp;
+                break;
+            }
+        }
+        // 若新数组首位是0，是由于原来首位是9，由于前一位进1，9+1=10后，首位变成0了，此时需要在前面补上一个1，数组长度由n变成n+1。
+        // 若新数组首位不是0，则无需多余处理，直接返回即可，数组长度还是n。
+        if ($digits[0] == 0) {
+            return array_merge([1], $digits);
+        } else {
+            return $digits;
+        }
+
+    }
+}
+```
+
+
+```php
+class Solution {
+
+    /**
+     * @param Integer[] $digits
+     * @return Integer[]
+     */
+    function plusOne($digits) {
+        $length = sizeof($digits);
         $ans = 0;
         $add = 1;
         for ($i = $length - 1; $i>=0; $i--) {
