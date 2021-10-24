@@ -24,27 +24,31 @@ class Solution {
      */
     function mergeInBetween($list1, $a, $b, $list2) {
         $n = 1;
+        // 找到第a-1个节点
         $left = $list1;
+        // 找到第b+1个节点
         $right = $list1;
-        $dumyRight = null;
-        $dumyRight->next = $right;
         while ($n <= $b) {
-            $dumyRight->next = $right->next->next;
             if ($n < $a) {
                 $left = $left->next; 
             }
             $right = $right->next;
-            
             $n++;
         }
-        $left->next = $list2;
+        $right = $right->next;
+        // 此处结束后，$left 和 $right 分别是 $list1 的前段的尾节点，和后段的头节点。
+
+        // 找到 $list2 的尾结点
         $cur = $list2;
         while ($cur->next) {
             $cur = $cur->next;
         }
-        $cur->next = $dumyRight->next;
+
+        // 拼接
+        $left->next = $list2;
+        $cur->next = $right;
         return $list1;
     }
-}
+}																	
 
 ```
