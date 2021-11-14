@@ -20,6 +20,38 @@
  *     }
  * }
  */
+
+// 迭代法
+class Solution {
+
+    private $res = [];
+    /**
+     * @param TreeNode $root
+     * @return Integer[]
+     */
+    function inorderTraversal($root) {
+        if (!$root) {
+            return [];
+        }
+
+        $res = []; // 存储结果
+        $arr = []; // 栈
+        $cur = $root;
+        while ($cur != null || !empty($arr)) {
+            if ($cur != null) { // 将左节点入栈
+                array_push($arr, $cur); 
+                $cur = $cur->left;
+            } else { // 出栈，并处理其右节点
+                $cur = array_pop($arr);
+                $res[] = $cur->val;
+                $cur = $cur->right;
+            }
+        }
+        return $res;
+    }
+}
+
+// 递归法
 class Solution {
 
     /**
@@ -39,6 +71,7 @@ class Solution {
     }
 }
 
+// 递归法2
 class Solution {
 
     private $res = [];
@@ -56,4 +89,5 @@ class Solution {
         return $this->res;
     }
 }
+
 ```
