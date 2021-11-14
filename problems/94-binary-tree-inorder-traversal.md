@@ -1,5 +1,7 @@
 ## 题目
 
+* 94. 二叉树的中序遍历
+
 ## 思路
 
 ## 代码
@@ -34,6 +36,24 @@ class Solution {
         $right = $this->inorderTraversal($root->right);
         
         return array_merge($left, $result, $right);
+    }
+}
+
+class Solution {
+
+    private $res = [];
+    /**
+     * @param TreeNode $root
+     * @return Integer[]
+     */
+    function inorderTraversal($root) {
+        if (!$root) {
+            return [];
+        }
+        $this->inorderTraversal($root->left);
+        array_push($this->res, $root->val);
+        $this->inorderTraversal($root->right);
+        return $this->res;
     }
 }
 ```
